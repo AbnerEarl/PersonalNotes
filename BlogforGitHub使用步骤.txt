@@ -1,0 +1,14 @@
+
+输入hexo s，开启服务器，访问该网址，正式体验Hexo
+
+假如页面一直无法跳转，那么可能端口被占用了。此时我们ctrl+c停止服务器，接着输入“hexo server -p 端口号”来改变端口号
+
+
+
+新建一篇博客，在cmd执行命令：hexo new post “博客名”
+
+
+在生成以及部署文章之前，需要安装一个扩展：npm install hexo-deployer-git --save
+
+
+使用编辑器编好文章，那么就可以使用命令：hexo d -g，生成以及部署了

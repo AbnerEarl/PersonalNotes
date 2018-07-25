@@ -1,0 +1,66 @@
+//调用printershare软件来打印该文件
+File picture = new File(bbfileurl);
+Uri data_uri=Uri.fromFile(picture);
+/* data_type - Mime type. MIME类型如下:
+
+
+"application/pdf"
+"text/html"
+"text/plain"
+"image/png"
+"image/jpeg"
+"application/msword" - .doc
+"application/vnd.openxmlformats-officedocument.wordprocessingml.document" - .docx
+"application/vnd.ms-excel" - .xls
+"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" - .xlsx
+"application/vnd.ms-powerpoint" - .ppt
+"application/vnd.openxmlformats-officedocument.presentationml.presentation" - .pptx
+*/
+try {
+
+String data_type="application/msword";
+Intent i = new Intent(Intent.ACTION_VIEW);
+i.setPackage("com.dynamixsoftware.printershare.amazon");//未注册之前com.dynamixsoftware.printershare，注册后加上amazon
+i.setDataAndType(data_uri, data_type);
+startActivity(i);
+} catch (Exception e) {
+//没有找到printershare
+}
+
+}
+
+
+
+
+
+============================================================
+
+File picture = new File(bbfileurl);
+Uri data_uri=Uri.fromFile(picture);
+
+try {
+
+String data_type="application/msword";
+Intent i = new Intent(Intent.ACTION_VIEW);
+i.setPackage("com.dynamixsoftware.printershare.amazon");//未注册之前com.dynamixsoftware.printershare，注册后加上amazon
+i.setDataAndType(data_uri, data_type);
+startActivity(i);
+} catch (Exception e) {
+//没有找到printershare
+}
+
+
+
+Intent intent = new Intent(); 
+ComponentName comp = new ComponentName("com.dynamixsoftware.printershare","com.dynamixsoftware.printershare.ActivityPrintPDF"); 
+intent = new Intent(); 
+intent.setComponent(comp); 
+intent.setAction("android.intent.action.VIEW"); 
+intent.setType("application/pdf"); 
+intent.setData(Uri.fromFile(pdf)); 
+startActivity(intent);
+
+
+
+
+

@@ -1,0 +1,16 @@
+new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent=new Intent(MainActivity.this,Verification.class);
+                intent.putExtra("tag","100");
+                startActivity(intent);
+                finish();
+            }
+        }).start();

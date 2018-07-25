@@ -1,0 +1,14 @@
+
+开启：mongod 、mongo
+关闭：use admin 、db.shutdownServer()
+
+查看数据库：show dbs
+创建数据库：use 数据库名称
+删除数据库：db.dropDatabase()
+
+查看数据集：show collections
+保存数据集：db.名称.save({字典格式})
+查询数据集：db.名称.find({字典格式})
+更新数据集：db.名称.update({字典格式},{$set:{字典格式}})
+删除一条数据集：db.名称.remove({字典格式})
+删除整个数据集：db.名称.drop()

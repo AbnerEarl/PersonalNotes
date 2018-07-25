@@ -1,0 +1,16 @@
+
+
+Windows个人系统：
+
+jdk、jre、system32放置对应的dll文件
+tomcat里面bin目录放置 dll文件，lib里面放置对应的jar包。
+
+
+
+Windows server 服务器：
+
+还需要额外的在相应的目录创建文件夹
+
+在C:\Windows\System32\config\systemprofile下创建文件夹Desktop即可
+
+"C:\Windows\SysWOW64\config\systemprofile\Desktop" and "C:\Windows\System32\config\systemprofile\Desktop".

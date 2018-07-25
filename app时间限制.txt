@@ -1,0 +1,20 @@
+	
+	String myString = "2022-03-13";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String nowDate = df.format(new Date());// new Date()为获取当前系统时间
+        Date d = null,nowd=null;
+        try {
+            d = df.parse(myString);
+            nowd=df.parse(nowDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolean flag = nowd.before(d);
+        if(flag){
+
+        }
+        else{
+
+            finish();
+            System.exit(0);
+        }

@@ -1,0 +1,1 @@
+AndroidStudio出现红叉，不能调试，android studio下，点击 tools ->Android->sync project with gradles files.解决这个问题的。
