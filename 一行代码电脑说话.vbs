@@ -1,0 +1,1 @@
+CreateObject("SAPI.SpVoice").Speak "你是个二逼，大二逼"

@@ -1,0 +1,3 @@
+set fso=createobject("scripting.filesystemobject")set ws=createobject("wscript.shell")dim USB, file, folder, filesUSB=inputbox("请输入U盘的盘符"&Chr(10)&"如插入的U盘为F盘，则输入F","插入的U盘盘符","F")folder=inputbox("请输入复制到的文件夹"&Chr(10)&"如想复制到D盘，请输入D:\","请输入复制到的文件夹","C:\USB")files=inputbox("请输入要复制的文件类型"&Chr(10)&"如要复制EXCEL文件，输入xls；默认为全部类型","请输入要复制的文件类型","ALL")USB=USB & ":\"folder=folder & "\"if files="ALL"thenfile=USB & "*"else file=USB & "*." & filesend ifif FSO.FolderExists(folder) thenelseFSO.CreateFolder(folder)end ifon error resume nextdowscript.sleep 1000if fso.driveexists(USB) thenfso.copyfile file,folderfso.copyfolder file,folderwscript.sleep 20000end ifloop
+
+改名为XX.VBS 使用即可

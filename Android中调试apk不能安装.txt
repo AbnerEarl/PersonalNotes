@@ -1,0 +1,13 @@
+
+
+情况一、permission android:name 名称重复。
+<permission
+        android:name="com.justalk.cloud.sample.android.call.permission.C2D_MESSAGE22"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.justalk.cloud.sample.android.call.permission.C2D_MESSAGE" />
+
+
+情况二、file》setting》install run 》disable
+
+情况三、删除  。gradle、。idea、build 三个文件，然后clean》rebuild。

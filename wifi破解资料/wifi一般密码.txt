@@ -1,0 +1,32 @@
+TP-LINK、D-LINK
+192.168.1.1 192.168.0.1
+用户名:admin 密码:admin或者没有密码
+实达
+192.168.10.1
+用户名:user 密码:password
+用户名:root 密码:grouter
+全向
+用户名:root 密码:root
+中兴
+用户名:adsl 密码:adsl831
+(中兴的adsl的密码前面为adsl，后面为型号,比如中兴831，密码就是adsl831)
+磊科
+192.168.1.1 192.168.0.1
+用户名:guest 密码:guest
+伊泰克
+IP:192.168.1.1
+用户名:supervisor 密码:12345
+华硕
+IP:192.168.1.1
+用户名:adsl 密码:adsl1234
+阿尔卡特
+192.168.1.1
+一般没有密码
+泛德
+admin conexant
+大亚
+192.168.1.1
+用户名:admin 密码:dare
+同维DSL699E
+192.168.1.1
+用户名:ROOT 密码:ROOT

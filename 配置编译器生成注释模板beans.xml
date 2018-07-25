@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+ <templates>
+     <template 
+         autoinsert="false" 
+         context="filecomment_context"
+         deleted="false" 
+         description="Comment for created Java files"
+         enabled="true" 
+         id="org.eclipse.jdt.ui.text.codetemplates.filecomment"
+         name="filecomment">
+ /**
+  * [Product]
+  *     ${project_name}
+  * [Copyright]
+  *     Copyright ? ${year} ICSS All Rights Reserved.
+  * [FileName]
+  *     ${file_name}
+  * [History]
+  *     Version  Date      Author     Content
+  *     -------- --------- ---------- ------------------------
+  *     1.0.0    ${date}   ${user}    最初版本
+  */</template>
+  <!-- 类注释 -->
+     <template autoinsert="false" context="typecomment_context"
+         deleted="false" description="Comment for created types" enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.typecomment"
+         name="typecomment">
+ /**
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *      TODO 请在此处简要描述此类所实现的功能。因为这项注释主要是为了在IDE环境中生成tip帮助，务必简明扼要
+  * &lt;b&gt;Remarks: &lt;/b&gt;
+  *        TODO 请在此处详细描述类的功能、调用方法、注意事项、以及与其它类的关系
+  */</template>
+  <!-- 构造函数注释 -->
+     <template 
+         autoinsert="false" 
+         context="constructorcomment_context"
+         deleted="false" 
+         description="Comment for created constructors"
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.constructorcomment"
+         name="constructorcomment">
+ /** 
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     构造一个 ${enclosing_type}  
+  * &lt;b&gt;Remarks: &lt;/b&gt;
+  *     构造类 ${enclosing_type} 的构造函数 ${enclosing_type}
+  * ${tags} 
+  */</template>
+  <!-- GET方法注释 -->
+     <template 
+         autoinsert="false" 
+         context="gettercomment_context"
+         deleted="false" 
+         description="Comment for getter method" 
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.gettercomment"
+         name="gettercomment">
+ /**
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     获取${bare_field_name}的值
+  * @return ${bare_field_name} 
+  */</template>
+  <!-- SET方法注释 -->
+     <template 
+         autoinsert="true" 
+         context="settercomment_context"
+         deleted="false" 
+         description="Comment for setter method" 
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.settercomment"
+         name="settercomment">
+ /** 
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     设置 ${bare_field_name} 的值 
+  * @param ${param} 
+  */</template>
+  <!-- 方法注释 -->
+     <template 
+         autoinsert="false" 
+         context="methodcomment_context"
+         deleted="false" 
+         description="Comment for non-overriding methods"
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.methodcomment"
+         name="methodcomment">
+ /**
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     ${enclosing_method}(请用一句话描述这个方法的作用)
+  * ${tags} 
+  */</template>
+  <!-- 代理方法注释 -->
+     <template 
+         autoinsert="true" 
+         context="delegatecomment_context"
+         deleted="false" 
+         description="Comment for delegate methods"
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.delegatecomment"
+         name="delegatecomment">
+ /** 
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     代理方法 ${enclosing_method}
+  * ${tags} 
+  * ${see_to_target} 
+  */</template>
+  <!-- 复写方法注释 -->
+     <template 
+         autoinsert="true" 
+         context="overridecomment_context"
+         deleted="false" 
+         description="Comment for overriding methods"
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.overridecomment"
+         name="overridecomment">
+ /** 
+  * &lt;b&gt;Summary: &lt;/b&gt;
+  *     复写方法 ${enclosing_method}
+  * ${tags} 
+  * ${see_to_overridden} 
+  */</template>
+  <!-- 局部变量注释 貌似没用 -->
+     <template 
+         autoinsert="false" 
+         context="fieldcomment_context"
+         deleted="false" 
+         description="Comment for fields" 
+         enabled="true"
+         id="org.eclipse.jdt.ui.text.codetemplates.fieldcomment"
+         name="fieldcomment">
+ /** 
+  * ${field}:${todo}（请用一句话描述这个变量表示什么） 
+  */</template>
+ </templates>
