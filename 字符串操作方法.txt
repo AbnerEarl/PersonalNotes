@@ -1,0 +1,38 @@
+1.字符与字符串：
+        public String(char[] value)--------------------------全部字符数组变为String类
+	public String(char[] value,int offset,int count)-----部分字符数组变为String
+	public char charAt(int index)------------------------返回指定位置上的字符
+	public char[] toCharArray()--------------------------字符串变为字符数组
+2.字节数组与字符串：
+	public String(byte[] bytes)--------------------------全部字节数组变为字符串
+	public String(byte[] bytes,int offset,int length)----部分字节数组变为字符串
+	public byte[] getBytes()-----------------------------字符串变为字节数组
+	public byte[] getBytes(String charsetName)throws
+		UnsupportedEncodingException-----------------转码操作
+3.字符串比较：
+	public boolean equals(String anObject)---------------字符串内容的比较，区分大小写
+	public boolean equalsIgnoreCase(String anotherString)不区分大小写完成字符串内容的比较
+	public int compareTo(String anotherString)-----------判断字符串的大于，小于，等于
+4.字符串检索：
+	public boolean contains(String s)--------------------判断指定的子字符串是否存在
+	public int indexOf(String str)-----------------------从头查找指定的子字符串是否存在，存在则返回字符串的索引									，不存在则返回-1
+	public int indexOf(String str,int fromIndex)---------从指定位置开始检索，没找到则返回-1
+	public int lastIndexOf(String str)-------------------从后向前查找字符串的位置
+	public int lastIndexOf(String str,int fromIndex)-----从指定位置开始由后向前查找
+	public boolean startsWith(String prefix)-------------判断是否以指定字符串开头
+	public boolean endsWith(Sting suffix)----------------判断是否以指定字符串结尾
+5.字符串替换：
+	public String replaceAll(String regex,String replacement)满足条件的内容全部替换
+	public String replaceFirst(String regex,String replacement)替换第一个满足条件的内容
+6.字符串截取：
+	public String subString(int beginindex)--------------从头截取到尾
+	public String subString(int beginindex,int endindex)-截取中间的部分内容
+7.字符串拆分：
+	public String[] split(String regex)------------------全拆分
+	public String[] split(String regex,int limit)--------拆分成指定的个数
+8.其他方法：
+	public boolean isEmpty()-----------------------------判断是否是空字符串，不是null
+	public int length()----------------------------------取得字符串内容的长度
+	public String toLowerCase()--------------------------所有内容变为小写
+	public String toUpperCase()--------------------------所有内容变为大写
+	public String trim()--------------------------------去掉左右空格，中间的无法去掉
