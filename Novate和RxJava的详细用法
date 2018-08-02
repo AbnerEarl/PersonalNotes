@@ -1,0 +1,438 @@
+
+
+
+novate = new Novate.Builder(this)
+                .addHeader(headers) //添加公共请求头
+                .addParameters(parameters)//公共参数
+                .connectTimeout(10)  //连接时间 可以忽略
+                .readTimeout(10)  //读取 可以忽略
+                .addCookie(false)  //是否同步cooike 默认不同步
+                .addCache(true)  //是否缓存 默认缓存
+                .addCache(cache, cacheTime)   //自定义缓存
+                .baseUrl("Url") //base URL
+                .addLog(true) //是否开启log
+                .cookieManager(new NovateCookieManager()) // 自定义cooike，可以忽略
+                .addInterceptor() // 自定义Interceptor
+                .addNetworkInterceptor() // 自定义NetworkInterceptor
+                .proxy(proxy) // 设置代理
+                .client(client)  //clent 默认不需要
+                .build(); 
+
+                 novate.addSSL(hosts,  certificates);//支持https需要接入证书：
+
+
+准备证书文件数组和host 白名单；
+
+ int[] certificates = {R.raw.myssl1, R.raw.myssl2,......}
+
+ int[] hosts = {"https:// you hosturl2", "https:// you hosturl2",......}
+
+ certificates是你的ssl证书文件的id，项目中请放到raw资源文件下, myssl.cer怎么生成, 请用pc浏览器自动导出证书，保存
+
+
+ Novate也提供了以下扩展方法：
+
+  novate.addInterceptor()
+             .addCallAdapterFactory()
+             .callFactory()
+             .proxy()
+             .client()
+
+
+
+
+
+基础使用：
+
+返回String
+
+  new Novate.Builder(this)
+           .baseUrl("http://ip.taobao.com/")
+           .build()
+           .rxGet("service/getIpInfo.php", parameters, new RxStringCallback() {
+
+            @Override
+            public void onStart(Object tag) {
+                super.onStart(tag);
+            }
+
+            @Override
+            public void onNext(Object tag, String response) {
+            }
+
+            @Override
+            public void onError(Object tag, Throwable e) {
+            }
+
+            @Override
+            public void onCancel(Object tag, Throwable e) {
+            }
+        });
+
+
+
+
+返回Bean
+
+ novate.rxGet("path or url", parameters, new RxResultCallback<ResultModel>() {
+
+
+
+    });
+
+
+
+ 返回List
+
+    new Novate.Builder(this)
+            .baseUrl("http://xxx.com/")
+            .build()
+            .rxGet("service/getList", parameters, new RxListCallback<List<MusicBookCategory>>() {
+                @Override
+                public void onNext(Object tag, int code, String message, List<MusicBookCategory> response) {
+
+                }
+
+
+                @Override
+                public void onError(Object tag, Throwable e) {
+
+                }
+
+                @Override
+                public void onCancel(Object tag, Throwable e) {
+
+                }
+            });
+
+ 返回File
+
+ novate.rxGet("path or url", null, new RxFileCallBack(filePath, "name.jpg") {
+
+
+
+    });              
+
+
+
+RxPost：
+进行Post方式的请求调用
+
+返回String
+
+   novate.rxPost("path or url", parameters, new RxStringCallback() {
+
+
+    });
+
+    返回Bean
+
+ novate.rxPost("path or url", parameters, new RxResultCallback<ResultModel>() {
+
+
+
+    });
+
+返回List
+
+ novate.rxPost("path or url", parameters, new RxListCallback<List<ResultModel>>() {
+
+
+       ....
+
+    });
+
+
+
+返回File
+
+ novate.rxPost("path or url", null, new RxFileCallBack(filePath, "name.jpg") {
+
+
+
+    });
+
+
+
+
+
+
+RxUpLoad
+以Body方式post数据，可以上报载文件，图片，多媒体文件等。
+
+Novate提供了2种方式上传文件。body和part模式，Body不包含key值，part包含key值。
+
+RxUploadWithBody
+以Body方式post数据，可以上报文件，图片等。
+
+    String mPath = uploadPath; //"you File path ";
+    String url = "http:/xxx.com";
+
+    novate.rxUploadWithBody(url, new File(mPath), new RxStringCallback() {
+
+        @Override
+        public void onNext(Object tag, String response) {
+        }
+
+        @Override
+        public void onError(Object tag, Throwable e) {
+
+        }
+
+        @Override
+        public void onCancel(Object tag, Throwable e) {
+
+
+        }
+    });
+
+}
+
+RxUploadWithPart
+上传文件，默认的key是 *image *
+
+    String mPath = uploadPath; //"you File path ";
+     String url = "http:/xxx.com";
+    File file = new File(mPath);
+    novate.rxUploadWithPart(url, file, new RxStringCallback() {
+
+        @Override
+        public void onError(Object tag, Throwable e) {
+        }
+
+        @Override
+        public void onCancel(Object tag, Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(Object tag, String response) {
+        }
+
+
+    });
+
+
+如果自定义key 请看下面
+
+    String mPath = uploadPath; //"you File path ";
+    String url = "http:/xxx.com";
+
+    File file = new File(mPath);
+    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data; charset=utf-8"), file);
+
+    final NovateRequestBody requestBody = Utils.createNovateRequestBody(requestFile, new UpLoadCallback() {
+
+        @Override
+        public void onProgress(Object tag, int progress, long speed, boolean done) {
+
+            updateProgressDialog(progress);
+        }
+    });
+
+
+    MultipartBody.Part body2 =MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+    //请将image改成你和服务器约定好的key
+
+    novate.rxUploadWithPart(url, body2, new RxStringCallback() {
+        @Override
+        public void onError(Object tag, Throwable e) {
+        }
+
+        @Override
+        public void onCancel(Object tag, Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(Object tag, String response) {
+        }
+
+
+    });
+
+
+
+上传多文件：
+rxUploadWithPartListByFile：
+        List<File> fileList = new ArrayList<>();
+         fileList.add(file);
+         fileList.add(file);
+         fileList.add(file);
+        novate.rxUploadWithPartListByFile(url, fileList, new RxStringCallback() {
+
+            @Override
+            public void onStart(Object tag) {
+                super.onStart(tag);
+            }
+
+            @Override
+            public void onNext(Object tag, String response) {
+            }
+
+            @Override
+            public void onError(Object tag, Throwable e) {
+            }
+
+        });
+
+
+RxDownLoad
+以get方式下载数据，可以下载文件，图片，多媒体文件。
+
+使用rxGet()实现下载：
+   String downUrl = "http://wap.dl.pinyin.sogou.com/wapdl/hole/201512/03/SogouInput_android_v7.11_sweb.apk";
+
+    novate.rxGet(downUrl, parameters, new RxFileCallBack(FileUtil.getBasePath(this), "test.apk") {
+
+        @Override
+        public void onStart(Object tag) {
+            super.onStart(tag);
+            showPressDialog();
+        }
+
+        @Override
+        public void onNext(Object tag, File file) {
+            dismissProgressDialog();
+        }
+
+        @Override
+        public void onProgress(Object tag, float progress, long downloaded, long total) {
+            updateProgressDialog((int) progress);
+        }
+
+        @Override
+        public void onError(Object tag, Throwable e) {
+
+        }
+
+        @Override
+        public void onCancel(Object tag, Throwable e) {
+
+        }
+
+        @Override
+        public void onCompleted(Object tag) {
+            super.onCompleted(tag);
+
+        }
+    });
+
+
+
+RxDown()下载
+String downUrl = "http://wap.dl.pinyin.sogou.com/wapdl/hole/201512/03/SogouInput_android_v7.11_sweb.apk";
+new Novate.Builder(this)
+          .baseUrl(baseUrl)
+          .build()
+          .rxDownload(downUrl, new RxFileCallBack() {
+                    @Override
+                    public void onStart(Object tag) {
+                        super.onStart(tag);
+                        showPressDialog();
+                    }
+
+                    @Override
+                    public void onNext(Object tag, File file) {
+                        dismissProgressDialog();
+                        Toast.makeText(ExampleActivity.this, "下载成功!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onProgress(Object tag, float progress, long downloaded, long total) {
+                        updateProgressDialog((int) progress);
+                    }
+
+                    @Override
+                    public void onProgress(Object tag, int progress, long speed, long transfered, long total) {
+                        super.onProgress(tag, progress, speed, transfered, total);
+                        updateProgressDialog((int) progress);
+                    }
+
+                    @Override
+                    public void onError(Object tag, Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onCancel(Object tag, Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onCompleted(Object tag) {
+                        super.onCompleted(tag);
+                        dismissProgressDialog();
+                    }
+                });
+
+
+
+
+
+
+Custom Api
+以上方法默认会处理Novate自带的BaseApiService，如果默认的BaseApiService无法满足你的需求时，Novate同样支持你自己的ApiService。
+
+定义一个你自己的API：
+
+MyAPI
+
+ public interface MyAPI {
+
+   @GET("url")
+  Observable<MyBean> getdata(@QueryMap Map<String, String> maps);
+
+ }
+
+
+
+
+ Execute Call
+
+通过novate提供create()实例化你的API
+
+ MyAPI myAPI = novate.create(MyAPI.class);
+1
+2
+通过novate.call()来执行你的接口，你也不用关心，novate内部同样已进行RxJava线程控制。
+
+ novate.call(myAPI.getdata(parameters),
+            new BaseSubscriber<MyBean>(ExempleActivity.this) {
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(MyBean MyBean) {
+                }
+            });
+
+}
+
+
+
+取消
+每执行novate.xxx() 给上层返回了一个Subscription，上层可以调用unsubscribe()来进行取消！
+
+     if (!subscription.isUnsubscribed()) {
+         subscription.unsubscribe();
+     }
+
+
+
+
+取消
+每执行novate.xxx() 给上层返回了一个Subscription，上层可以调用unsubscribe()来进行取消！
+
+注意
+本框架自带视后端数据为： 
+{int code, String message(msg), T data(result)}
+
+如果你的API返回的数据格式不是上面的默认格式，若想用原生的数据，请用RxStringCallback, 或者RxGenericsCallback, 这很好的解决了数据格式不兼容问题。
+
+
+源码
+GitHub:https://github.com/Tamicer/Novate/
