@@ -1,0 +1,24 @@
+将C:\Users\ustcck\.IntelliJIdea2016.3\config拷贝E:/Ideaconfig/中
+
+打开IntelliJ IDEA 2016.3(64)文件所在位置下的idea.properties
+
+取消idea.properties中的idea.config.path、idea.plugins.path的注释，
+
+修改idea.properties中的idea.config.path、idea.plugins.path。如下：
+
+#---------------------------------------------------------------------
+# Uncomment this option if you want to customize path to IDE config folder. Make sure you're using forward slashes.
+#---------------------------------------------------------------------
+idea.config.path=E:/Ideaconfig/config
+
+
+#---------------------------------------------------------------------
+# Uncomment this option if you want to customize path to IDE system folder. Make sure you're using forward slashes.
+#---------------------------------------------------------------------
+# idea.system.path=${user.home}/.IntelliJIdea/system
+
+
+#---------------------------------------------------------------------
+# Uncomment this option if you want to customize path to user installed plugins folder. Make sure you're using forward slashes.
+#---------------------------------------------------------------------
+idea.plugins.path=E:/Ideaconfig/config/plugins
