@@ -1,0 +1,22 @@
+
+	 ActiveXComponent _app = new ActiveXComponent("Word.Application");
+        _app.setProperty("Visible", Variant.VT_FALSE);
+
+        Dispatch documents = _app.getProperty("Documents").toDispatch();
+
+        // 打开FreeMarker生成的Word文档
+        String path = System.getProperty("web.root") + docPath;
+        String outFileName = docPath.substring(0,docPath.lastIndexOf("."))+"_out"+".doc";
+        String outpath = System.getProperty("web.root") + outFileName;
+
+        Dispatch doc = Dispatch.call(documents, "Open", path, Variant.VT_FALSE, Variant.VT_TRUE).toDispatch();
+        // 另存为新的Word文档
+        Dispatch.call(doc, "SaveAs", outpath, Variant.VT_FALSE, Variant.VT_TRUE);
+
+        Dispatch.call(doc, "Close", Variant.VT_FALSE);
+        _app.invoke("Quit", new Variant[] {});
+        ComThread.Release();
+
+
+        System.out.println("接口里面的返回路径19："+docPath);
+        return outFileName;

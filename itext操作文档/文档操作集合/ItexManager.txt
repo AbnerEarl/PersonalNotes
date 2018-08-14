@@ -1,0 +1,506 @@
+package mdstack.srvmon.util;
+ 
+import java.awt.Color;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+ 
+import com.lowagie.text.Cell;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.HeaderFooter;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.rtf.RtfWriter2;
+import com.lowagie.text.rtf.headerfooter.RtfHeaderFooter;
+import com.lowagie.text.rtf.style.RtfParagraphStyle;
+ 
+/**
+ * IText操作类
+ * @author shyh
+ *
+ */
+public class ItextManager {
+ 
+	private Font font;
+	private BaseFont bfChinese;
+ 
+	public ItextManager() throws Exception {
+		// 设置中文字体
+//		bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+		bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", false);
+		font = new Font(bfChinese);
+		font.setSize(30);
+		font.setStyle(FontFactory.HELVETICA);
+		font.setColor(new Color(0,0,0));
+		
+	}
+ 
+	public static ItextManager getInstance() throws Exception {
+		
+		return new ItextManager();
+	}
+ 
+	@SuppressWarnings({ "unused", "unchecked" })
+	public void createRtfContext(List<String> imgList, OutputStream out,String type, List<Map<String, Object>> hostAppList, List<Map<String, Object>> result, Map<String, Object> resultMap, Map<String, Object> resultMap1, Map<String, Object> resultMap2) {
+		
+		Document doc = new Document(PageSize.A4.rotate(), 80, 80, 80, 80);//word横向展示
+		try {
+			if("word".equals(type)){
+				RtfWriter2.getInstance(doc, out);
+			}else if("pdf".equals(type)){
+				PdfWriter.getInstance(doc, out);
+			}
+//		        // 添加页脚   
+//		        HeaderFooter footer = new HeaderFooter(new Phrase("footer"), false);   
+//		        footer.setAlignment(Rectangle.ALIGN_CENTER);   
+//		        doc.setFooter(footer);
+				Image headerImage = Image.getInstance("D:/yemei.jpg"); 
+				// 创建有1行2列的表格  
+		        Table tables = new Table(2, 1); 
+		        // 设置table的边框宽度为0  
+		        tables.setBorderWidth(1f); 
+		         tables.setWidth(100);  
+		        // 设置表格右对齐，其中1为居中对齐，2为右对齐，3为左对齐  
+		        tables.setAlignment(1); 
+		        // 设置各列的宽度  
+		        int[] widthss = { 300, 300 }; 
+		        tables.setWidths(widthss); 
+		        // 创建单元格,并且将单元格内容设置为图片  
+		        Cell cells = new Cell(); 
+		        cells = new Cell(headerImage); 
+		        cells.setBorder(0);
+		        tables.addCell(cells); 
+		        cells.setVerticalAlignment(3);  // 设置垂直居中  
+		        cells.setHorizontalAlignment(3);  // 设置水平居中  
+		        cells = new Cell("机器数据分析平台"); 
+		        cells.setBorder(0);
+		        tables.addCell(cells);
+		        cells.setVerticalAlignment(2);  // 设置垂直居中  
+		        cells.setHorizontalAlignment(2);  // 设置水平居中  
+			
+		        RtfHeaderFooter header1 = new RtfHeaderFooter(tables);
+		        header1.setAlignment(tables.MARKED);
+		        doc.setHeader(header1);
+		        
+		        
+		        doc.open();
+				//第一级标题样式
+		        RtfParagraphStyle rtfGsBt1 = RtfParagraphStyle.STYLE_HEADING_1;
+		        rtfGsBt1.setAlignment(Element.ALIGN_LEFT);
+		        rtfGsBt1.setStyle(Font.BOLD);
+		        rtfGsBt1.setSize(15);
+		        
+		        //第二级标题样式
+		        RtfParagraphStyle rtfGsBt2 = RtfParagraphStyle.STYLE_HEADING_2;
+		        rtfGsBt2.setAlignment(Element.ALIGN_LEFT);
+		        rtfGsBt2.setStyle(Font.BOLD);
+		        rtfGsBt2.setSize(13);
+		        
+		        //设置带有目录格式的标题(标题1格式)
+//		        Paragraph title = new Paragraph(titleStr);  
+//		        // 设置标题格式对齐方式  
+//		        title.setAlignment(elementAlign);  
+//		        title.setFont(titleFont);  
+		        Paragraph title = new Paragraph("网络访问概况");
+		        title.setAlignment(Element.ALIGN_CENTER);
+		        title.setFont(font);
+		        doc.add(title);
+		        
+		        // 设置标题格式对齐方式  
+//		        Paragraph title1 = new Paragraph("一、网络访问概况");
+//		        title.setFont(rtfGsBt1);
+//		        doc.add(title1);
+		        
+		        Paragraph title2 = new Paragraph("1.1网络访问数量");
+		        // 设置标题格式对齐方式  
+		        title2.setFont(rtfGsBt2);
+		        doc.add(title2);
+		        
+		        //网络访问概况：
+		        Map<String,Object>titleMap=resultMap;
+		        String t1 = titleMap.get("network_count").toString().substring(5,10);
+		        String t2 = titleMap.get("network_host_count").toString().substring(7,10);
+		        String t3 = titleMap.get("flow_fz").toString();
+		        String t4 = titleMap.get("flow_aver").toString();
+		        // 正文字体风格  
+		        Font contextFont = new Font(bfChinese, 10, Element.ALIGN_CENTER);  
+		        Paragraph context = new Paragraph("网络服务访问次数："+t1+"次\n提供服务主机数量："+t2+"台\n网络流量峰值："+t3+"\n网络流量平均值："+t4+"");  
+		        //设置行距  
+		        context.setLeading(3f);
+		        // 正文格式左对齐  
+		        context.setFont(contextFont);  
+		        // 离上一段落（标题）空的行数  
+		        context.setSpacingBefore(1);
+		        // 设置第一行空的列数  
+		        context.setFirstLineIndent(20);  
+		        doc.add(context);  
+		        
+//		        Paragraph title3 = new Paragraph("1.2 TCP/UDP服务");
+//		        // 设置标题格式对齐方式  
+//		        title.setFont(rtfGsBt2);
+//		        doc.add(title3);
+		        Paragraph title3 = new Paragraph("1.2 TCP/UDP服务");
+		        // 设置标题格式对齐方式  
+		        title3.setFont(rtfGsBt2);
+		        doc.add(title3);
+		        
+		        // 创建有三行的表格  
+		        Table table = new Table(2, 3); 
+		        // 设置table的边框宽度为0  
+		        table.setBorderWidth(1f); 
+		         table.setWidth(100);  
+		        // 设置表格右对齐，其中1为居中对齐，2为右对齐，3为左对齐  
+		        table.setAlignment(3); 
+		        // 设置各列的宽度  
+		        int[] widths = { 200, 200 }; 
+		        table.setWidths(widths); 
+		        // table.setPadding(0);  
+		        // table.setSpacing(0); 
+		        
+		        Image img = null;
+				img = Image.getInstance(imgList.get(0));
+				float heigth = img.getHeight();
+				float width = img.getWidth();
+				int percent = getPercent3(heigth, width);
+				img.setAlignment(Image.LEFT);//图片居左显示
+				img.scalePercent(percent + 3);// 表示是原来图像的比例;
+				
+				Image img4 = null;
+				img4 = Image.getInstance(imgList.get(4));
+				float heigth4 = img4.getHeight();
+				float width4 = img4.getWidth();
+				int percent4 = getPercent3(heigth4, width4);
+				img4.setAlignment(Image.LEFT);//图片居左显示
+				img4.scalePercent(percent4 + 3);// 表示是原来图像的比例;
+		        
+				
+				//已登记服务数和未登记服务数
+				Map<String,Object>titleMap1=resultMap1;
+				String d1 = titleMap1.get("count_service").toString().substring(7,9);
+				String d2 = titleMap1.get("regist_service").toString().substring(7,8);
+				
+				Map<String,Object>titleMap2=resultMap2;
+				String u1 = titleMap2.get("count_service").toString().substring(7,10);
+				String u2 = titleMap2.get("regist_service").toString().substring(7,8);
+		        // 创建单元格,并且将单元格内容设置为图片  
+		        Cell cell = new Cell(); 
+		        cell = new Cell("TCP"); 
+		        cell.setBorder(0);
+		        table.addCell(cell); 
+		        cell = new Cell("UDP"); 
+		        cell.setBorder(0);
+		        table.addCell(cell);
+		        cell = new Cell("已登记服务数："+d2); 
+		        cell.setBorder(0);
+		        table.addCell(cell); 
+		        cell = new Cell("已登记服务数："+u2); 
+		        cell.setBorder(0);
+		        table.addCell(cell); 
+		        cell = new Cell("未登记服务数："+d1); 
+		        cell.setBorder(0);
+		        table.addCell(cell); 
+		        cell = new Cell("未登记服务数："+u1); 
+		        cell.setBorder(0);
+		        table.addCell(cell); 
+		        cell = new Cell(img); 
+		        cell.setBorder(0);// 设置单元格边框为0  
+		        table.addCell(cell); 
+		        cell.setVerticalAlignment(1);  // 设置垂直居中  
+		        cell.setHorizontalAlignment(1);  // 设置水平居中  
+		        cell = new Cell(img4); 
+		        cell.setBorder(0);
+		        cell.setVerticalAlignment(1); 
+		        cell.setHorizontalAlignment(1); 
+		        table.addCell(cell); 
+		        doc.add(table);
+		        doc.newPage();
+		        
+		        Paragraph title4 = new Paragraph("二、应用服务TOP10：");
+		        title.setFont(rtfGsBt1);
+		        doc.add(title4);
+				Image img1 = null;
+				img1 = Image.getInstance(imgList.get(1));
+				float heigth1 = img1.getHeight();
+				float width1 = img1.getWidth();
+				int percent1 = getPercent3(heigth1, width1);
+				img1.setAlignment(Image.ALIGN_CENTER);//图片居右显示
+				img1.scalePercent(percent1 + 3);// 表示是原来图像的比例;
+				doc.add(img1);
+				
+				Paragraph title7 = new Paragraph("2.1热点应用Top10");
+		        // 设置标题格式对齐方式  
+		        title7.setFont(rtfGsBt2);
+		        doc.add(title7);
+		        // 创建有9行的表格  
+		        Table table2 = new Table(9,10); 
+		        // 设置table的边框宽度为0  
+		        table2.setBorderWidth(1f); 
+		        table2.setWidth(100);  
+		        // 设置表格右对齐，其中1为居中对齐，2为右对齐，3为左对齐  
+		        table2.setAlignment(3); 
+		        // 设置各列的宽度  
+		        int[] widths2 = { 5,15,10,10,10,10,10,10,10}; 
+		        table2.setWidths(widths2); 
+		        Cell cell2 = new Cell(); 
+		        cell2 = new Cell("序号"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("资产名称"); 
+		        table2.addCell(cell2);
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("IP"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("TCP:端口"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("会话数"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("字节数"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("数据字节数"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("包数"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  
+		        cell2.setHorizontalAlignment(1); 
+		        cell2 = new Cell("来访IP数"); 
+		        table2.addCell(cell2); 
+		        cell2.setVerticalAlignment(1);  // 设置垂直居中  
+		        cell2.setHorizontalAlignment(1);  // 设置水平居中  
+		        for(int i=0; i<hostAppList.size(); i++){
+			    	Map<String, Object> map = hostAppList.get(i);
+		    		cell2 = new Cell(""+(i+1));
+		    		 table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("assetname")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("ip")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("service")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((""+map.get("sessions")+""));
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("bytes")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("dbytes")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("packets")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			        cell2 = new Cell((map.get("visitor_ip")).toString());
+			        table2.addCell(cell2);
+		    		cell2.setVerticalAlignment(1);  
+			        cell2.setHorizontalAlignment(1);
+			    }
+		        doc.add(table2);
+		        doc.newPage();
+				
+			    Paragraph title5 = new Paragraph("2.2选择活跃终端TOP10展现指标");
+		        title5.setFont(rtfGsBt2);
+		        doc.add(title5);
+		        
+				Image img2 = null;
+				img2 = Image.getInstance(imgList.get(2));
+				float heigth2 = img2.getHeight();
+				float width2 = img2.getWidth();
+				int percent2 = getPercent(heigth2, width2);
+				img2.setAlignment(Image.MIDDLE);//图片居中显示
+				img2.scalePercent(percent2 + 3);// 表示是原来图像的比例;
+				doc.add(img2);
+				doc.newPage();
+				
+				
+				
+				Paragraph title6 = new Paragraph("2.3活跃终端top10");
+				// 设置标题格式对齐方式  
+				title6.setFont(rtfGsBt2);
+				doc.add(title6);
+				Image img3 = null;
+				// 图片
+				img3 = Image.getInstance(imgList.get(3));
+				float heigth3 = img3.getHeight();
+				float width3 = img3.getWidth();
+				int percent3 = getPercent(heigth3, width3);
+				img3.setAlignment(Image.MIDDLE);//图片居中显示
+				img3.scalePercent(percent3 + 3);// 表示是原来图像的比例;
+				doc.add(img3);
+				doc.newPage();
+				
+				
+				Paragraph title8 = new Paragraph("2.4活跃终端top10");
+				// 设置标题格式对齐方式  
+				title8.setFont(rtfGsBt2);
+				doc.add(title8);
+		        // 创建有三行的表格  
+		        Table table3 = new Table(8,10); 
+		        // 设置table的边框宽度为0  
+		        table3.setBorderWidth(1f); 
+		        table3.setWidth(100);  
+		        // 设置表格右对齐，其中1为居中对齐，2为右对齐，3为左对齐  
+		        table3.setAlignment(3); 
+		        // 设置各列的宽度  
+		        int[] widths3 = { 5,15,10,15,10,10,10,10}; 
+		        table3.setWidths(widths3); 
+		        Cell cell3 = new Cell(); 
+		        cell3 = new Cell("序号"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("资产名称"); 
+		        table3.addCell(cell3);
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("IP"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("所属地域"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("会话数"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("字节数"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("数据字节数"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        cell3 = new Cell("包数"); 
+		        table3.addCell(cell3); 
+		        cell3.setVerticalAlignment(1);  
+		        cell3.setHorizontalAlignment(1); 
+		        for(int i=0; i<result.size(); i++){
+			    	Map<String, Object> res = result.get(i);
+			    	cell3 = new Cell(""+(i+1));
+		    		table3.addCell(cell3);
+		    		cell3.setVerticalAlignment(1);  
+		    		cell3.setHorizontalAlignment(1);
+		    		cell3 = new Cell((res.get("assetname")).toString());
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((res.get("ip")).toString());
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((""+res.get("coun_reg_city"+"")));
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((res.get("sessions").toString()));
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((res.get("bytes")).toString());
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((res.get("dbytes")).toString());
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			        cell3 = new Cell((res.get("packets")).toString());
+			        table3.addCell(cell3);
+			        cell3.setVerticalAlignment(1);  
+			        cell3.setHorizontalAlignment(1);
+			    }
+		        doc.add(table3);
+			    
+				
+					
+			doc.close();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+ 
+	/**
+	 * 第一种解决方案 在不改变图片形状的同时，判断，如果h>w，则按h压缩，否则在w>h或w=h的情况下，按宽度压缩
+	 * 
+	 * @param h
+	 * @param w
+	 * @return
+	 */
+ 
+	public static int getPercent(float h, float w) {
+		int p = 0;
+		float p2 = 0.0f;
+			p2 = 297 / h * 100;
+		p = Math.round(p2);
+		return p;
+	}
+ 
+	/**
+	 * 第二种解决方案，统一按照宽度压缩 这样来的效果是，所有图片的宽度是相等的.
+	 * 
+	 * @param args
+	 */
+	public static int getPercent2(float h, float w) {
+		int p = 0;
+		float p2 = 0.0f;
+		p2 = 530 / w * 80;
+		p = Math.round(p2);
+		return p;
+	}
+	
+	/**
+	 * 第三种解决方案，将图片统一按照固定的大小来压缩，只适用于个别图片
+	 * 
+	 * @param args
+	 */
+	public static int getPercent3(float h, float w) {
+		int p = 0; 
+		float p2 = 0.0f;
+		p2 = 530 / w * 35;
+		p2 = 530 / h * 35;
+		p = Math.round(p2);
+		return p;
+	}
+}

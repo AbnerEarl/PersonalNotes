@@ -1,0 +1,33 @@
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+
+public class pdf {
+	public static void main(String[] args) {
+		createPdf();
+	}
+	public static void createPdf(){
+		//创建一个A4纸大小的文档，上下左右边距分别为0,0,0,0
+		//Document  document= new Document (PageSize.A4,0,0,0,0); 
+		//或者
+		Document  document= new Document (PageSize.A4); 
+		 try {
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:/image.pdf"));
+			Image image = Image.getInstance("D:/background.png");
+			image.setAlignment(Image.UNDERLYING);
+			document.open();
+			document.add(image);
+			document.add(new Paragraph("sss"));
+			document.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+}

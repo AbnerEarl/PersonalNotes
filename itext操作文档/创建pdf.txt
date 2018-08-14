@@ -1,0 +1,48 @@
+package com.construct.mobileApi.Report;
+
+import java.io.FileOutputStream;
+import com.lowagie.text.Document;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+/**
+ * PROJECT_NAME:WEBSYSTEM
+ * PACKAGE_NAME:com.construct.mobileApi.Report
+ * USER:Frank
+ * DATE:2018/8/14
+ * TIME:9:38
+ * DAY_NAME_FULL:ÐÇÆÚ¶þ
+ * DESCRIPTION:On the description and function of the document
+ **/
+public class PdfTest {
+
+
+        /**
+         * @param args
+         * @throws Exception
+         */
+        public static void main(String[] args) throws Exception {
+            PdfReader reader = new PdfReader("d:\\report.pdf");
+            int n = reader.getNumberOfPages();
+            Document document = new Document(reader.getPageSize(n));
+            float width = document.getPageSize().getWidth();
+            // Create a stamper that will copy the document to a new file
+            PdfStamper stamp = new PdfStamper(reader, new FileOutputStream("d:\\reportMin.pdf"));
+            PdfContentByte over;
+            Image img = Image.getInstance("d:\\ss.jpg");
+            width = width - img.getWidth();
+            System.out.println("width:" + width);
+            //img.setAbsolutePosition(width, 0);
+            img.setAbsolutePosition(0, 0);
+            img.setAlignment(Image.ALIGN_LEFT);
+            if(n > 0)
+            {
+                // Text over the existing page
+                over = stamp.getOverContent(n);
+                over.addImage(img);
+            }
+            stamp.close();
+        }
+
+}
