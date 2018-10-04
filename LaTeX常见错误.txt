@@ -1,0 +1,3 @@
+Misplaced alignment tab character &
+
+解决办法：在用latex导入参考文献时，有时会出现这种错误，原因在于参考文献中出现了&，这是我们在前面加上\就可以了。即 & -> \& 

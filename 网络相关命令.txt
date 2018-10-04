@@ -1,0 +1,10 @@
+设置wifi
+netsh wlan set hostednetwork mode=allow ssid=Test（WiFi名称） key=12345678（八位以上WiFi密码）
+开启wifi
+netsh wlan start hostednetwork
+
+
+刷新网络
+netsh wlan start hostednetwork
+刷新DNS
+ipconfig /flushdns

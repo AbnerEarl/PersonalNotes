@@ -1,0 +1,2 @@
+编译生成 released版本的apk和aar。
+命令：gradlew assembleRelease
