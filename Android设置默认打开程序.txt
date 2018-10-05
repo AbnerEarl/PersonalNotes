@@ -1,0 +1,43 @@
+Android中设置自己应用为默认打开
+
+<activity android:name=".EasyNote" 
+android:label="@string/app_name"
+android:launchMode="singleTask" 
+android:screenOrientation="portrait"> 
+<intent-filter> 
+<action android:name="android.intent.action.MAIN" /> 
+<category android:name="android.intent.category.LAUNCHER" /> 
+</intent-filter>
+<intent-filter> 
+<action android:name="android.intent.action.VIEW">
+</action> 
+<category android:name="android.intent.category.DEFAULT">
+</category> 
+<data android:mimeType="text/plain">
+</data> 
+</intent-filter> 
+</activity>
+
+
+第一个<intent-filter>标签是每个程序都有的，关键是要添加第二个！这样你的应用程序就会出现在默认打开列表了。
+
+注意需要将mimeType修改成你需要的类型，文本文件当然就是：text/plain
+
+还有其它常用的如：
+
+
+
+text/plain（纯文本）
+text/html（HTML文档）
+application/xhtml+xml（XHTML文档）
+image/gif（GIF图像）
+image/jpeg（JPEG图像）【PHP中为：image/pjpeg】
+image/png（PNG图像）【PHP中为：image/x-png】
+video/mpeg（MPEG动画）
+application/octet-stream（任意的二进制数据）
+application/pdf（PDF文档）
+application/msword（Microsoft Word文件）
+message/rfc822（RFC 822形式）
+multipart/alternative（HTML邮件的HTML形式和纯文本形式，相同内容使用不同形式表示）
+application/x-www-form-urlencoded（使用HTTP的POST方法提交的表单）
+multipart/form-data（同上，但主要用于表单提交时伴随文件上传的场合）

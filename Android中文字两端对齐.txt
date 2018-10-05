@@ -1,0 +1,54 @@
+在android中的webview中,可以对文本内容进行对齐,具体方法如下:
+public class MainActivity extends Activity {
+
+@Override  
+protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    setContentView(R.layout.activity_main);  
+
+    String htmlText = " %s ";  
+    String myData = "Hello World! This tutorial is to show demo of displaying text with justify alignment in WebView.";  
+
+    WebView webView = (WebView) findViewById(R.id.webView1);  
+    webView.loadData(String.format(htmlText, myData), "text/html", "utf-8");  
+}  
+}
+
+
+
+
+Android studio中 
+在build.gradle加入dependencies
+compile 'me.codeboy.android:align-text-view:2.3.1'
+
+设置每一段最后一行对齐方式，默认居左对齐 ，同时也可以在xml注释中设置对其方式:
+
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:cb="http://schemas.android.com/apk/res-auto"//这个必须加上
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+          <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/alignTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cb:align="left"//最后一行的对齐方式
+                android:textSize="14dsp"/>    
+    </LinearLayout>
+
+代码参考：https://github.com/androiddevelop/AlignTextView
+
+2.Eclipse中，参考代码，将代码中的AlignTextView提取出来，然后在Xml中在将下列代码加上。
+
+        <LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:cb="http://schemas.android.com/apk/res-auto"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+          <me.codeboy.android.aligntextview.AlignTextView
+                android:id="@+id/alignTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                cb:align="left"
+                android:textSize="14dsp"/>    
+        </LinearLayout>

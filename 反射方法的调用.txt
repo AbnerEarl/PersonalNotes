@@ -1,0 +1,48 @@
+ public void startPrint(){
+        try {
+
+            //同一个app中的反射
+            //Class printService = Class.forName("com.example.frank.usbhpprint.MyPrintService");  //初始化类：包名+类名
+            // Class printService = Class.forName("android.printservice.PrintService.MyPrintService");  //初始化类：包名+类名
+            // Method method = printService.getMethod("onPrintJobQueued");
+            // Object methodobject1 = printService.newInstance();  //调用静态方法则不需要实例化这步
+            // method.invoke(methodobject1); //反射调用
+            // Log.e("调用成功获得名字：",printService.getName());
+
+            //不同app中的反射
+            Context mmsCtx = createPackageContext("com.example.frank.usbhpprint", Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
+            Class<?> clazz = Class.forName("com.example.frank.usbhpprint.MyPrintService", true, mmsCtx.getClassLoader());
+            Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+            Constructor<?> constructor = null;
+            for (int i = 0; i < constructors.length;i++) {
+                constructor = constructors[i];
+                if (constructor.getGenericParameterTypes().length == 0)
+                    break;
+            }
+            constructor.setAccessible(true);
+            /*Class<?> camera = Class.forName("com.example.frank.usbhpprint.MyPrintService", true, mmsCtx.getClassLoader());
+            Object cameraObject = camera.newInstance();*/
+
+            Method[] methodss = clazz.getDeclaredMethods();
+            for(Method meth : methodss) {
+                Log.i("方法名字getDeclaredMethods","name:" + meth.getName());
+                if(meth.getName().contains("PrintJobQueued")) {
+                    //Object maObject = constructor.newInstance((Object) PrintUtil.printJobFinal);
+                    //Object maObject = constructor.newInstance();
+                    meth.setAccessible(true);
+                    //meth.invoke(maObject);
+                    break;
+                }
+            }
+
+            /*Method[] methods = clazz.getMethods();
+            for(Method meth: methods) {
+                Log.i("方法名字方法名字getMethods","name:" + meth.getName());
+            }*/
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
