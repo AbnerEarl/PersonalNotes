@@ -1,0 +1,14 @@
+服务端：
+ServerSocket server=new ServerSocket(5209);
+socket=server.accept();
+BufferedReader in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+line=in.readLine();
+socket.close();
+server.close();
+
+
+
+客户端：
+Socket socket=new Socket("192.168.1.115",5209);
+BufferedReader in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+socket.close();
