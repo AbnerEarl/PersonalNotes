@@ -1,0 +1,12 @@
+打印服务增强
+在 Android 7.0 中，打印服务开发者现在可以公开关于个别打印机和打印作业的其他信息。
+
+在列出各打印机时，打印服务现在可以通过两种方式来设置按打印机的图标：
+
+您可以通过调用 PrinterInfo.Builder.setResourceIconId() 设置源于资源 ID 的图标
+您可以通过调用 PrinterInfo.Builder.setHasCustomPrinterIcon()，并针对使用 android.printservice.PrinterDiscoverySession.onRequestCustomPrinterIcon() 请求图标的情况设置回调来显示源自网络的图标
+此外，您还可以通过调用 PrinterInfo.Builder.setInfoIntent() 提供按打印机活动，以显示其他信息。
+
+您可以通过分别调用 android.printservice.PrintJob.setProgress() 和 android.printservice.PrintJob.setStatus() 在打印任务通知中指示打印任务的进度和状态。
+
+如需了解有关这些方法的详细信息，请参阅可下载的 API 参考。
