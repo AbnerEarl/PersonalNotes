@@ -1,0 +1,27 @@
+1、首先web页面布局尽量采用百分比布局；
+
+2、在html的head部分加入如下内容：
+    <meta content="width=device-width" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link href="css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <!-- //Stylesheet -->
+    <!--fonts-->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+
+3、如有table和img标签的话请配置下面的信息：
+<table class="table-responsive">和<img class="img-responsive">

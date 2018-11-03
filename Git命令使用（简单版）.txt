@@ -1,0 +1,8 @@
+1、克隆项目
+git clone 仓库地址
+2、追踪文件，也是添加文件
+git add 文件或者 .
+3、提交文件
+git commit -m "提交信息"
+4、上传代码
+git push
