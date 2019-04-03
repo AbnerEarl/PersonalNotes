@@ -1,0 +1,9 @@
+在conf目录下，新建 custom.ini
+
+修改端口：
+# The http port  to use
+http_port = 8090
+
+influxd -config influxdb.conf
+telegraf -config telegraf.conf
+启动，在bin目录下grafana-server.exe
