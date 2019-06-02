@@ -1,4 +1,7 @@
-µ¼º½£º
+ä¸‹è½½åœ°å€ï¼š
+https://www.torproject.org/
+
+å¯¼èˆªï¼š
 http://rl7z5n6s3v245zz3.onion/dwc/index.php?sid=105a81ced28ac921c8d0d79a4c3f3002
 https://3g2upl4pq6kufc4m.onion/
 http://thehiddenwiki.org/
@@ -20,27 +23,27 @@ http://rso4hutlefirefqp.onion/
 http://tfwdi3izigxllure.onion/
 http://sheep5u64fi457aw.onion/
 
-ÓÊÏä£º
+é‚®ç®±ï¼š
 http://mail2tor2zyjdctd.onion/
 
 
-ÏÂÔØI2P
+ä¸‹è½½I2P
 https://geti2p.net/en/download
-È»ºóÄã±ØÐë°Ñä¯ÀÀÆ÷ÉèÖÃ³ÉÊ¹ÓÃI2P£¬ÒÔFirefoxÎªÀý£º
-´ò¿ªä¯ÀÀÆ÷¨C>²Ëµ¥¨C>Ñ¡Ïî¨C>¸ß¼¶¨C>ÍøÂç¨C>ÉèÖÃ
-ÔÚÁ¬½ÓÉèÖÃ´°¿ÚÑ¡Ôñ£¬¡°ÊÖ¶¯´úÀíÅäÖÃ¡±£º
-HTTP Proxy À¸ÖÐÌîÈë127.0.0.1£¬¶Ë¿ÚÌî4444£»
-SSL Proxy À¸ÖÐÌîÈë127.0.0.1£¬¶Ë¿ÚÌî4445£»
-No Proxy for ¿òÖÐÌîÈë¡°localhost 127.0.0.1¡±¡£
-FTP´úÀíÉèÖÃÏàÍ¬¡£
+ç„¶åŽä½ å¿…é¡»æŠŠæµè§ˆå™¨è®¾ç½®æˆä½¿ç”¨I2Pï¼Œä»¥Firefoxä¸ºä¾‹ï¼š
+æ‰“å¼€æµè§ˆå™¨â€“>èœå•â€“>é€‰é¡¹â€“>é«˜çº§â€“>ç½‘ç»œâ€“>è®¾ç½®
+åœ¨è¿žæŽ¥è®¾ç½®çª—å£é€‰æ‹©ï¼Œâ€œæ‰‹åŠ¨ä»£ç†é…ç½®â€ï¼š
+HTTP Proxy æ ä¸­å¡«å…¥127.0.0.1ï¼Œç«¯å£å¡«4444ï¼›
+SSL Proxy æ ä¸­å¡«å…¥127.0.0.1ï¼Œç«¯å£å¡«4445ï¼›
+No Proxy for æ¡†ä¸­å¡«å…¥â€œlocalhost 127.0.0.1â€ã€‚
+FTPä»£ç†è®¾ç½®ç›¸åŒã€‚
 
-µ¼º½ÍøÖ·£º
+å¯¼èˆªç½‘å€ï¼š
 http://direct.i2p
 http://btdigg.i2p
 
-×¨ÓÃÏµÍ³£º
+ä¸“ç”¨ç³»ç»Ÿï¼š
 https://www.techspot.com/downloads/6518-tails.html
 
-ÉîÍø£º
+æ·±ç½‘ï¼š
 https://www.ddosi.com/b134/
 https://www.cnblogs.com/bonelee/p/7416620.html
