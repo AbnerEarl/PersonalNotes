@@ -1,0 +1,14 @@
+
+1、动态追加内容：
+	$('#content').append(result);
+2、js中传输中文乱码：
+	前端：objectvalue = encodeURI(encodeURI(objectvalue))；
+	后端：
+	String obj = null;
+	if (objectTag != null) {
+         	   try {
+            	    obj = URLDecoder.decode(URLDecoder.decode(objectTag, "UTF-8"), "UTF-8");
+          	  } catch (UnsupportedEncodingException e) {
+             	   e.printStackTrace();
+          		  }
+    	  }
