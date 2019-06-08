@@ -1,0 +1,17 @@
+mac操作：
+启动工具，执行命令“./ding -config=./ding.cfg -subdomain=域名前缀 端口”
+
+windows操作：
+先进入工具所在路径，命令行输入：ding -config=./ding.cfg -subdomain=asdaa 80 
+
+
+数据库映射：
+在数据库里面执行：
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123';
+GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '123456';
+FLUSH PRIVILEGES;
+注意123456为数据库远程登录的密码，root为用户名。
+数据库连接：
+
+mysql -h vaiwan.com -u root -p -P 1234
+1234是启动远程数据库连接默认的端口，可以在ding.cfg中进行修改。
