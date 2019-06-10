@@ -1,10 +1,15 @@
 
-onResume��������activity����֮�����ִ�еģ�Ҳ���ǻָ�ִ�С���������������onCreate()->onStart()->onResume();
+onResume是在启动activity启动之后才能执行的，也就是恢复执行。程序正常启动：onCreate()->onStart()->onResume();
 
-�����˳���onPause()->onStop()->onDestory()һ��Activity������һ��Activity: onPause()->onStop(), �ٷ��أ�onRestart()->onStart()->onResume()��
+正常退出：onPause()->onStop()->onDestory()一个Activity启动另一个Activity: onPause()->onStop(), 再返回：onRestart()->onStart()->onResume()。
 
-����back �˳��� onPause()->onStop()->onDestory(),�ٽ��룺onCreate()->onStart()->onResume();
+程序按back 退出： onPause()->onStop()->onDestory(),再进入：onCreate()->onStart()->onResume();
 
-����home �˳��� onPause()->onStop(),�ٽ��룺onRestart()->onStart()->onResume()��
+程序按home 退出： onPause()->onStop(),再进入：onRestart()->onStart()->onResume()。
 
-��onCreate֮���Լ�ÿ�κ������������д��������淵�ص�ʱ�򣬶������onResume()��
+在onCreate之后，以及每次横竖切屏，还有从其他界面返回的时候，都会调用onResume()。
+
+获取插件的启动Activity
+获取到插件的ApplicationInfo对象，即可通过：
+Intent intent = pm.getLaunchIntentForPackage(packageInfo.packageName);
+来获取插件的启动Activity的Intent。因为宿主并不知道插件的启动Activity是哪个，也不知道插件中都有什么类。
