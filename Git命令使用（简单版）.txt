@@ -1,8 +1,84 @@
-1����¡��Ŀ
-git clone �ֿ��ַ
-2��׷���ļ���Ҳ�������ļ�
-git add �ļ����� .
-3���ύ�ļ�
-git commit -m "�ύ��Ϣ"
-4���ϴ�����
-git push
+1、克隆项目
+git clone 仓库地址 新的文件夹名称（默认远程仓库名称）
+
+2、追踪文件，也是添加文件
+git add 文件名 或者 .
+
+3、提交文件
+git commit -m "提交信息"
+
+4、上传代码
+git push 或者跟上 origin 分支名称
+
+5、查看分支
+git branch 或者跟上 -r 查看远程分支，-a 查看所有分支
+
+6、切换分支
+git checkout 分支名称
+
+7、创建分支
+git branch 分支名称  或者 git checkout -b 分支名称
+
+8、合并分支
+切换到主分支，git merge 要合并的分支名称
+
+9、删除分支
+切换到主分支，git branch -D 分支名称
+
+10、创建文件
+touch 文件名称  或者 vi 文件名称
+
+11、创建文件夹
+mkdir 文件夹名称
+
+12、查看文件
+cat 文件名称
+
+13、重命名文件
+mv 原文件名 新文件名
+
+14、移动文件
+mv 原文件名 新文件夹
+
+15、配置帐号
+git config --global user.name 'userName'
+git config --global user.email 'email'
+
+16、删除文件
+rm 文件名称
+
+17、删除文件夹
+rm -r 文件夹
+
+18、查看分支状态
+git status
+
+19、本地到远程仓库
+先有本地库，后有远程库，将本地库push到远程库：
+关联本地仓库和GitHub库：git remote add origin 网站上的仓库地址;
+第一次将本地仓库推送到GitHub上：git push –u origin master;
+
+20、生成 SSH Key
+ssh-keygen –t rsa –C "你的邮箱@xx.com"
+
+21、获取远程代码
+git fetch 或者跟上 origin 或者跟上 origin 远程分支名称
+
+22、比较本地的master分支和origin/master分支的差别
+git log -p master  ..origin/master
+
+23、合并代码
+git merge origin/master 或者 git rebase origin/master
+
+24、对比分支
+git diff tmp //将当前分支和tmp分支进行对比
+
+25、获取并合并
+git pull：相当于是从远程获取最新版本并merge到本地。
+要取回origin主机的next分支，与本地的master分支合并：  git pull origin next:master
+如果远程分支(next)要与当前分支合并，则冒号后面的部分可以省略：  git pull origin next
+git也允许手动建立追踪关系： git branch --set-upstream master origin/next
+如果当前分支与远程分支存在追踪关系，git pull就可以省略远程分支名： git pull origin
+如果当前分支只有一个追踪分支，连远程主机名都可以省略： git pull
+
+
