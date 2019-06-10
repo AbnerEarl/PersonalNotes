@@ -55,6 +55,7 @@ git status
 
 19、本地到远程仓库
 先有本地库，后有远程库，将本地库push到远程库：
+初始化本地仓库：git init
 关联本地仓库和GitHub库：git remote add origin 网站上的仓库地址;
 第一次将本地仓库推送到GitHub上：git push –u origin master;
 
