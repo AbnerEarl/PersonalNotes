@@ -22,3 +22,10 @@ ThisCrackLicenseId-{
 "hash":"2911276/0",
 "gracePeriodDays":7,
 "autoProlongated":false}
+
+
+
+
+补丁：
+https://blog.csdn.net/shengshengshiwo/article/details/79599761
+http://idea.lanyus.com/
