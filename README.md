@@ -11,3 +11,6 @@ https://salttiger.com/
 
 ### 2.优秀开源项目
 https://hellogithub.com/
+
+### 3.精美文档讲义
+https://www.gitbook.com/
