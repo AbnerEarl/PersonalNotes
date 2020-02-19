@@ -1,0 +1,34 @@
+
+        String entTime = "2020-02-18 22:12:00";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String nowTime = df.format(new Date());// new Date()为获取当前系统时间
+        Date endd = null,nowd=null;
+        try {
+            endd = df.parse(entTime);
+            nowd=df.parse(nowTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolean flag = endd.getTime()>nowd.getTime()?true:false;
+
+
+
+
+        String myString = "2020-02-20";
+        SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String nowDate = dfs.format(new Date());// new Date()为获取当前系统时间
+        Date end = null,now=null;
+        try {
+            end = dfs.parse(myString);
+            now=dfs.parse(nowDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolean result = now.before(end);
+        if(result){
+
+        }else{
+            finish();
+            System.exit(0);
+        }
+
